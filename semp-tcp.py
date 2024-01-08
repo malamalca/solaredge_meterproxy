@@ -20,7 +20,7 @@ from pymodbus.payload import BinaryPayloadBuilder
 
 def t_update(ctx, stop, module, device, refresh):
 
-    this_t = threading.currentThread()
+    this_t = threading.current_thread()
     logger = logging.getLogger()
 
     while not stop.is_set():
@@ -157,7 +157,7 @@ if __name__ == "__main__":
 
                 slave_ctx = ModbusSlaveContext()
 
-                block_1601 = BinaryPayloadBuilder(byteorder=Endian.Big, wordorder=Endian.Little)
+                block_1601 = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.LITTLE)
                 block_1601.add_32bit_int(1234) # config passcode
                 block_1601.add_16bit_int(confparser[meter].getint("ct_current", fallback=default_config["meters"]["ct_current"])) # ct rated current
                 block_1601.add_16bit_int(confparser[meter].getint("ct_current", fallback=default_config["meters"]["ct_current"])) # ct rated current l1
@@ -182,7 +182,7 @@ if __name__ == "__main__":
                 block_1601.add_16bit_int(0) # io pin mode
                 slave_ctx.setValues(3, 1600, block_1601.to_registers())
 
-                block_1651 = BinaryPayloadBuilder(byteorder=Endian.Big, wordorder=Endian.Little)
+                block_1651 = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.LITTLE)
                 block_1651.add_16bit_int(0) # apply config
                 block_1651.add_16bit_int(address) # modbus address
                 block_1651.add_16bit_int(4) # baud rate
@@ -191,7 +191,7 @@ if __name__ == "__main__":
                 block_1651.add_16bit_int(5) # message delay
                 slave_ctx.setValues(3, 1650, block_1651.to_registers())
 
-                block_1701 = BinaryPayloadBuilder(byteorder=Endian.Big, wordorder=Endian.Little)
+                block_1701 = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.LITTLE)
                 block_1701.add_32bit_int(confparser[meter].getint("serial_number", fallback=default_config["meters"]["serial_number"])) # serial number
                 block_1701.add_32bit_int(0) # uptime (s)
                 block_1701.add_32bit_int(0) # total uptime (s)
