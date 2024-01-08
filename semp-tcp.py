@@ -31,7 +31,7 @@ def t_update(ctx, stop, module, device, refresh):
                 logger.debug(f"{this_t.name}: no new values")
                 continue
 
-            block_1001 = BinaryPayloadBuilder(byteorder=Endian.Big, wordorder=Endian.Little)
+            block_1001 = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.LITTLE)
             block_1001.add_32bit_float(values.get("energy_active", 0)) # total active energy
             block_1001.add_32bit_float(values.get("import_energy_active", 0)) # imported active energy
             block_1001.add_32bit_float(values.get("energy_active", 0)) # total active energy non-reset
@@ -51,7 +51,7 @@ def t_update(ctx, stop, module, device, refresh):
             block_1001.add_32bit_float(values.get("frequency", 0)) # line frequency
             ctx.setValues(3, 1000, block_1001.to_registers())
 
-            block_1101 = BinaryPayloadBuilder(byteorder=Endian.Big, wordorder=Endian.Little)
+            block_1101 = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.LITTLE)
             block_1101.add_32bit_float(values.get("l1_energy_active", 0)) # total active energy l1
             block_1101.add_32bit_float(values.get("l2_energy_active", 0)) # total active energy l2
             block_1101.add_32bit_float(values.get("l3_energy_active", 0)) # total active energy l3
