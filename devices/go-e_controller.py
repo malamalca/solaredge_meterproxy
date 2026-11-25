@@ -36,10 +36,10 @@ def values(device):
     
     #print(data['usv'][0]['u1'])
 
-    #logger = logging.getLogger()
+    logger = logging.getLogger()
     #logger.debug(f"values: {data}")
 
-    return {
+    readings = {
         "energy_active": data['cec'][0][0],
         "import_energy_active": data['cec'][0][1],
         "power_active": data['ccp'][0],
@@ -96,3 +96,7 @@ def values(device):
         #"l2_demand_power_active": (values.get("l2_demand_current", 0) * values.get("l2_voltage", 0)),
         #"l3_demand_power_active": (values.get("l3_demand_current", 0) * values.get("l3_voltage", 0))
     }
+
+    logger.debug(f"values: {readings}")
+
+    return readings
